@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { JournalService } from '../journal-entries.service';
 @Component({
   selector: 'app-entry-list',
   templateUrl: './entry-list.component.html',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntryListComponent implements OnInit {
 
-  constructor() { }
+  journals:Array<any> = [];
+  constructor(public journalService:JournalService) {
+    this.journalService.getJournalList().subscribe( list => {
+      this.journals = list;
+    });
+  }
 
   ngOnInit() {
   }
